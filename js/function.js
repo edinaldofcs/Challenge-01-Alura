@@ -54,7 +54,7 @@ function MostrarMensagemDeErro(msg) {
 }
 
 var validarInput = () => {
-    let maior = input.value[input.value.length - 1].charCodeAt(0) >= 97 && input.value[input.value.length - 1].charCodeAt(0) <= 122;
+    let maior = input.value[input.value.length - 1].charCodeAt(0) >= 97 && input.value[input.value.length - 1].charCodeAt(0) <= 122  || input.value[input.value.length - 1].charCodeAt(0) == 32;
     var texto;
     if (maior) {
         texto = input.value;
