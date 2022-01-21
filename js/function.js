@@ -8,20 +8,6 @@ var descriptografar = criaorObjeto('descriptografar');
 var resposta = criaorObjeto('resposta');
 var copiar = criaorObjeto('copiar');
 var erro = criaorObjeto('erro');
-var decisao = "";
-
-
-function verificarClique() {
-
-    var escolha = decisao == 'criptografar';
-
-    if (escolha) {
-        input.value == "" ? MostrarMensagemDeErro('Favor inserir uma mensagem') : encriptar();
-    } else {
-        input.value == "" ? MostrarMensagemDeErro('Favor inserir uma mensagem') : desencriptar();
-    }
-
-}
 
 function encriptar() {
 
@@ -69,23 +55,21 @@ var validarInput = () => {
 
 input.addEventListener('input', validarInput);
 
-criptografar.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
     event.preventDefault();
 
-    decisao = 'criptografar';
-    verificarClique();
+    var decisao = event.target.value;
+
+    if (decisao == 'criptografar') {
+        input.value == "" ? MostrarMensagemDeErro('Favor inserir uma mensagem') : encriptar();
+    } else if(decisao == 'descriptografar') {
+        input.value == "" ? MostrarMensagemDeErro('Favor inserir uma mensagem') : desencriptar();
+    } else if(decisao == 'copiar'){
+        validarCopia();
+    }
 });
 
-descriptografar.addEventListener('click', (event) => {
-
-    event.preventDefault();
-
-    decisao = 'descriptografar';
-    verificarClique();
-});
-
-
-copiar.addEventListener('click', () => {
+function validarCopia() {
 
     var content = resposta.innerHTML;
 
@@ -93,32 +77,22 @@ copiar.addEventListener('click', () => {
 
         navigator.clipboard.writeText(content)
             .then(() => {
-                animarCopia();
+                animarCopiaouFalhaAoCopiar('animar', 'Texto Copiado');
             })
             .catch(erro => {
-                animarcopiaErro();
+                animarCopiaouFalhaAoCopiar('animarErro', 'Falha ao copiar');
                 console.log(erro);
             })
     }else{
         console.log('nada a copiar');
     }
-
-})
-
-function animarCopia() {
-    copiar.classList.add('animar');
-    copiar.textContent = "Texto Copiado";
-    setTimeout(() => {
-        copiar.classList.remove('animar');
-        copiar.textContent = "Copiar texto";
-    }, 2000);
 }
 
-function animarcopiaErro() {
-    copiar.classList.add('animarErro');
-    copiar.textContent = "Falha ao copiar";
+function animarCopiaouFalhaAoCopiar(classe, texto) {
+    copiar.classList.add(classe);
+    copiar.textContent = texto;
     setTimeout(() => {
-        copiar.classList.remove('animarErro');
+        copiar.classList.remove('animar');
         copiar.textContent = "Copiar texto";
     }, 2000);
 }
