@@ -2,12 +2,12 @@ function criaorObjeto(obj) {
     return document.getElementById(obj);
 }
 
-var input = criaorObjeto('input-text');
-var criptografar = criaorObjeto('criptografar')
-var descriptografar = criaorObjeto('descriptografar');
-var resposta = criaorObjeto('resposta');
-var copiar = criaorObjeto('copiar');
-var erro = criaorObjeto('erro');
+const input = criaorObjeto('input-text');
+const criptografar = criaorObjeto('criptografar')
+const descriptografar = criaorObjeto('descriptografar');
+const resposta = criaorObjeto('resposta');
+const copiar = criaorObjeto('copiar');
+const erro = criaorObjeto('erro');
 
 function encriptar() {
 
